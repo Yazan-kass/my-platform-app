@@ -2,10 +2,21 @@ import { useState } from "react";
 import "./main.css";
 import { myProjects } from "./myProjects";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
+import Loader from "../6-loader/Loader";
 
 const Main = () => {
   const [currentActive, setcurrentActive] = useState("all");
   const [arr, setArr] = useState(myProjects);
+  const [loading, setLoading] = useState(true);
+  const [loadedData, setLoadedData] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadedData(myProjects);
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   const handleClick = (buttonCategory) => {
     setcurrentActive(buttonCategory);
@@ -73,12 +84,16 @@ const Main = () => {
                 key={item.imgPath}
                 className="  card"
               >
-                <img
-                  style={{ maxHeight: "120px" }}
-                  width={266}
-                  src={item.imgPath}
-                  alt=""
-                />
+                {loading ? (
+                  <Loader />
+                ) : (
+                  <img
+                    style={{ maxHeight: "120px" }}
+                    width={266}
+                    src={item.imgPath}
+                    alt=""
+                  />
+                )}
 
                 <div style={{ width: "266px" }} className="box">
                   <h1 className="title">{item.projectTitle}</h1>
