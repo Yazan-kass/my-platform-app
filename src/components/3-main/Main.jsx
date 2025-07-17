@@ -72,7 +72,7 @@ const Main = () => {
         </button>
       </section>
 
-      <section className=" flex right-section">
+      <section id="projects" className=" flex right-section">
         <AnimatePresence>
           {arr.map((item) => {
             return (
